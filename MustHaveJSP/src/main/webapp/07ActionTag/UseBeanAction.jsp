@@ -13,6 +13,7 @@
 	<ul>
 		<li>이름 : <jsp:getProperty property="name" name="person" /></li>
 		<li>나이 : <jsp:getProperty property="age" name="person" /></li>
+		<li>학교 : <%= request.getParameter("school") %></li>
 	</ul>
 </body>
 </html>

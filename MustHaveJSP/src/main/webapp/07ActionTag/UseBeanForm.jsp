@@ -11,6 +11,7 @@
 	<form method="post" action="UseBeanAction.jsp">
 		이름 : <input type="text" name="name" /> <br />
 		나이 : <input type="text" name="age" /> <br />
+		학교 : <input type="text" name="school" /> <br />
 		<input type="submit" value="폼값 전송" />
 	</form>
 </body>
