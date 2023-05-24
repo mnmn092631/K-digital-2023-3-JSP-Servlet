@@ -25,10 +25,10 @@ public class MyELClass {
 		StringBuffer sb = new StringBuffer();
 		try {
 			sb.append("<table border='1'>");
-			for (int i = 2; i <= limitDan; i++) {
+			for (int i = 1; i <= 9; i++) {
 				sb.append("<tr>");
-				for (int j = 1; j <= 9; j++) {
-					sb.append("<td>" + i + "*" + j + "=" + (i * j) + "</td>");
+				for (int j = 2; j <= limitDan; j++) {
+					sb.append("<td>" + j + "*" + i + "=" + (i * j) + "</td>");
 				}
 				sb.append("</tr>");
 			}
