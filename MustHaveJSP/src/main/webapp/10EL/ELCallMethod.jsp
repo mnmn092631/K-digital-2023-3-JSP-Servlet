@@ -18,5 +18,6 @@ pageContext.setAttribute("myClass", myClass);
 	
 	<h3>클래스명을 통해 정적 메서드 호출하기</h3>
 	${ MyELClass.showGugudan(7) }
+	${ MyELClass.showGugudanRow(7) }
 </body>
 </html>
