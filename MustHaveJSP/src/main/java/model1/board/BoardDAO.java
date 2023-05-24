@@ -112,21 +112,19 @@ public class BoardDAO extends JDBCConnect1 {
 			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";
 		}
 
-		query += " ORDER BY num DESC LIMIT ?, ?";
+		query += " ORDER BY num DESC LIMIT " + map.get("start") + ", " +  map.get("end");
 
 		Connection con = getConnection();
 		if (con == null) return null;
-		PreparedStatement psmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
 
 		try {
 			// 쿼리문 완성
-			psmt = con.prepareStatement(query);
-			psmt.setInt(1, (int) map.get("start"));
-			psmt.setInt(2, (int) map.get("end"));
+			stmt = con.createStatement();
 
 			// 쿼리문 실행
-			rs = psmt.executeQuery();
+			rs = stmt.executeQuery(query);
 
 			while (rs.next()) {
 				// 한 행(게시물 하나)의 데이터를 DTO에 저장
@@ -146,7 +144,7 @@ public class BoardDAO extends JDBCConnect1 {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (psmt != null) psmt.close();
+				if (stmt != null) stmt.close();
 				if (rs != null) rs.close();
 				con.close();
 			} catch (SQLException e) {
