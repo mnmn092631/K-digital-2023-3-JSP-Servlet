@@ -105,14 +105,14 @@ public class BoardDAO extends JDBCConnect1 {
 		List<BoardDTO> bbs = new Vector<BoardDTO>(); // 결과(게시물 목록)를 담을 변수
 
 		// 쿼리문 템플릿
-		String query = " SELECT Re.* FROM ( " + "    SELECT Tb.*, Tb.num FROM ( " + "        SELECT * FROM board ";
+		String query = "SELECT * FROM board ";
 
 		// 검색 조건 추가
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";
 		}
 
-		query += "      ORDER BY num DESC " + "     ) Tb " + " ) " + "Re WHERE Tb.num BETWEEN ? AND ?";
+		query += " ORDER BY num DESC LIMIT ?, ?";
 
 		Connection con = getConnection();
 		if (con == null) return null;
@@ -122,8 +122,8 @@ public class BoardDAO extends JDBCConnect1 {
 		try {
 			// 쿼리문 완성
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, map.get("start").toString());
-			psmt.setString(2, map.get("end").toString());
+			psmt.setInt(1, (int) map.get("start"));
+			psmt.setInt(2, (int) map.get("end"));
 
 			// 쿼리문 실행
 			rs = psmt.executeQuery();
