@@ -32,7 +32,7 @@ public class MyELClass {
 			for (int i = 2; i <= limitDan; i++) {
 				sb.append("<tr>");
 				for (int j = 1; j <= 9; j++) {
-					sb.append("<td>" + j + "*" + i + "=" + (i * j) + "</td>");
+					sb.append("<td>" + i + "*" + j + "=" + (i * j) + "</td>");
 				}
 				sb.append("</tr>");
 			}
