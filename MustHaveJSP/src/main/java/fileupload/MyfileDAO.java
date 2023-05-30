@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Vector;
 
@@ -25,6 +26,8 @@ public class MyfileDAO extends JDBCConnect1 {
 			psmt.setString(3, dto.getCate());
 			psmt.setString(4, dto.getOfile());
 			psmt.setString(5, dto.getSfile());
+			
+			applyResult = psmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("INSERT 중 예외 발생");
 			e.printStackTrace();
@@ -44,12 +47,12 @@ public class MyfileDAO extends JDBCConnect1 {
 
 		String query = "SELECT * FROM myfile ORDER BY idx DESC";
 
-		PreparedStatement psmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
 
 		try {
-			psmt = con.prepareStatement(query);
-			rs = psmt.executeQuery();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
 
 			while (rs.next()) {
 				MyfileDTO dto = new MyfileDTO();
@@ -68,7 +71,7 @@ public class MyfileDAO extends JDBCConnect1 {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (psmt != null) psmt.close();
+				if (stmt != null) stmt.close();
 				if (rs != null) rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
