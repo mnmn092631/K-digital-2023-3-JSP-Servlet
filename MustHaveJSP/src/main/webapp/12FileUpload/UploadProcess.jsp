@@ -18,7 +18,7 @@ try {
 	String fileName = mr.getFilesystemName("attachedFile");
 	String ext = fileName.substring(fileName.lastIndexOf("."));
 	String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
-	String newFileName = ext;
+	String newFileName = now + ext;
 
 	File oldFile = new File(saveDirectory + File.separator + fileName);
 	File newFile = new File(saveDirectory + File.separator + newFileName);
@@ -28,8 +28,7 @@ try {
 	String title = mr.getParameter("title");
 	String[] cateArray = mr.getParameterValues("cate");
 	StringBuffer cateBuf = new StringBuffer();
-	if (cateArray == null)
-		cateBuf.append("선택 없음");
+	if (cateArray == null) cateBuf.append("선택 없음");
 	else {
 		for (String s : cateArray) {
 			cateBuf.append(s + ", ");
@@ -49,7 +48,6 @@ try {
 	dao.closeConnection(con);
 
 	response.sendRedirect("FileList.jsp");
-
 } catch (Exception e) {
 	e.printStackTrace();
 	request.setAttribute("errorMessage", "파일 업로드 오류");
